@@ -1,0 +1,12 @@
+<h1> test! </h1>
+
+<section id="tweets">
+  <ul>
+    <% @tweets.each do |tweet| %>
+      <li><%= link_to tweet.text  %>
+      </li>
+  </ul>
+
+</section>
+
+<% end %>
