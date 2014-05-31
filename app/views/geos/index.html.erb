@@ -1,12 +1,22 @@
 <h1> test! </h1>
 
-<section id="tweets">
+<div id="tweets">
+
+<%= form_tag geos_path, :method => 'get' do %>
+    <%= text_field_tag :movie, params[:tweet] %>
+    <%= submit_tag "Search", :name => nil %>
+    <br><br><br>
+
   <ul>
-    <% @tweets.each do |tweet| %>
-      <li><%= link_to tweet.text  %>
-      </li>
+    <% client.search("marry me", :result_type => "recent").take(3).collect do |tweet|
+  "#{tweet.user.screen_name}: #{tweet.text}" %>
+ 
+     
   </ul>
+</div>
 
-</section>
 
+
+
+<% end %>
 <% end %>
