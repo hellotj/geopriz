@@ -1,22 +1,26 @@
 <h1> test!!! </h1>
 
-<div id="tweets">
+<div id="keyword_search_box">
 
 <%= form_tag geos_path, :method => 'get' do %>
-    <%= text_field_tag :movie, params[:tweet] %>
-    <%= submit_tag "Search", :name => nil %>
-    <br><br><br>
+    <%= text_field_tag :keyword, params[:keyword] %>
+    <%= submit_tag "Search" %>
+<% end %>
 
-  <ul>
-    <% client.search("marry me", :result_type => "recent").take(3).collect do |tweet|
-  "#{tweet.user.screen_name}: #{tweet.text}" %>
- 
-     
-  </ul>
+<% if params.has_key?(:keyword) && params[:keyword] != "" %>
+	<ul>
+		<% $twitter.search(params[:keyword], :result_type => "recent").take(6).each do |tweet| %>
+			<li>
+			<div><%= tweet.text %></div>
+			</li>
+		<% end %>
+	</ul>
+<% end %>
+
+
 </div>
 
 
 
 
-<% end %>
-<% end %>
+
